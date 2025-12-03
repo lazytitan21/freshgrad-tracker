@@ -1,0 +1,15 @@
+# Render.com Configuration
+# This file tells Render how to build and run the app
+
+services:
+  - type: web
+    name: freshgrad-tracker
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.cjs
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
