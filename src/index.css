@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+	/* light theme tokens */
+	--bg: #f8fafc; /* slate-50 */
+	--panel: #ffffff; /* white */
+	--muted: #64748b; /* slate-500 */
+	--text: #0f172a; /* slate-900 */
+	--border: #e6eef6; /* soft border */
+}
+
+.dark{
+	--bg: #071121; /* slightly darker */
+	--panel: #0c1722; /* deep slate */
+	--muted: #9bb0c6; /* softer muted */
+	--text: #e6eef6; /* light text */
+	--border: #223242; /* brighter border for contrast */
+}
+
+/* Chart color tokens (light theme) */
+:root {
+	--c1: #0f172a; /* slate-900 */
+	--c2: #6366f1; /* indigo-500 */
+	--c3: #06b6d4; /* cyan-400 */
+	--c4: #f59e0b; /* amber-500 */
+	--c5: #10b981; /* emerald-500 */
+	--c6: #ef4444; /* red-500 */
+	--c7: #84cc16; /* lime-400 */
+	--c8: #22c55e; /* green-500 */
+	--c9: #64748b; /* slate-500 */
+	--c10: #8b5cf6; /* violet-500 */
+	--c11: #14b8a6; /* teal-500 */
+	--c12: #fb7185; /* rose-400 */
+}
+
+/* Dark mode chart colors: brighter and more saturated for contrast */
+.dark {
+	--c1: #e6eef6; /* light slate */
+	--c2: #9aa2ff;
+	--c3: #67f0ff;
+	--c4: #ffd27a;
+	--c5: #6ee7b7;
+	--c6: #ff8b8b;
+	--c7: #d7f36b;
+	--c8: #7df29a;
+	--c9: #9fb6c9;
+	--c10: #caa8ff;
+	--c11: #7ee0d8;
+	--c12: #ff9eb0;
+}
+
+body{ background-color: var(--bg); color: var(--text); }
+.bg-app { background-color: var(--bg); }
+.panel { background-color: var(--panel); border-color: var(--border); }
+.text-muted { color: var(--muted); }
+
+/* Smooth transitions for theme changes */
+* {
+	transition: background-color 260ms linear, color 260ms linear, border-color 260ms linear, stroke 260ms linear;
+}
+
+/* Quick compatibility overrides: map common Tailwind bg/border/text utilities to our variables in dark mode
+	 This lets existing markup that uses `bg-white`, `bg-slate-50`, etc. automatically adapt without editing every file. */
+.dark .bg-white,
+.dark .bg-slate-50,
+.dark .bg-slate-100,
+.dark .bg-gray-50,
+.dark .bg-gray-100,
+.dark .bg-gray-200,
+.dark .bg-slate-200,
+.dark .bg-slate-300,
+/* Also match opacity variants like bg-white/90 */
+.dark [class*="bg-white"],
+.dark [class*="bg-slate-50"],
+.dark [class*="bg-slate-100"],
+.dark [class*="bg-gray-50"],
+.dark [class*="bg-gray-100"],
+.dark [class*="bg-gray-200"],
+.dark [class*="bg-slate-200"],
+.dark [class*="bg-slate-300"] {
+	background-color: var(--panel) !important;
+}
+
+.dark .border,
+.dark .border-slate-200,
+.dark .border-gray-200,
+.dark .border-slate-100 {
+	border-color: var(--border) !important;
+}
+
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700,
+.dark .text-slate-600 {
+	color: var(--text) !important;
+}
+
+/* Keep small pills and badges readable by not overriding explicit dark: variants set in classNames */
+
+/* Force all text to be light in dark mode */
+.dark, .dark body, .dark * {
+	color: var(--text) !important;
+}
+
+/* Exceptions: inputs and buttons may need their own color, keep them readable */
+.dark input, .dark textarea, .dark select, .dark button {
+	color: var(--text) !important;
+}
+
+/* Strong overrides for common containers, cards, tables and controls in dark mode */
+.dark body, .dark .bg-app {
+	background: var(--bg) !important;
+}
+
+.dark .panel,
+.dark .rounded-2xl,
+.dark .rounded-3xl,
+.dark .card,
+.dark .shadow-sm,
+.dark .shadow-lg,
+.dark .shadow-xl {
+	background: var(--panel) !important;
+	border-color: var(--border) !important;
+	color: var(--text) !important;
+}
+
+/* Slightly longer transition for root so entire UI animates gently */
+:root, .dark {
+	transition: background-color 320ms ease, color 320ms ease, border-color 320ms ease;
+}
+
+/* Explicitly silence the transient focus/active rectangle on the theme toggle */
+.theme-toggle, .theme-toggle * {
+	outline: none !important;
+	box-shadow: none !important;
+}
+.theme-toggle:active, .theme-toggle:focus, .theme-toggle:focus-visible {
+	outline: none !important;
+	box-shadow: none !important;
+}
+/* Remove tap highlight on mobile devices */
+.theme-toggle { -webkit-tap-highlight-color: transparent; }
+
+/* Browser-specific fixes to remove lingering focus boxes */
+button.theme-toggle, button.theme-toggle * { -webkit-appearance: none; appearance: none; }
+button.theme-toggle::-moz-focus-inner { border: 0; }
+button.theme-toggle:focus { outline: none !important; box-shadow: none !important; }
+button.theme-toggle:active { outline: none !important; box-shadow: none !important; }
+button.theme-toggle:focus-visible { outline: none !important; box-shadow: none !important; }
+
+/* When a mouse/touch press is active, temporarily suppress focus visuals to avoid transient rectangles */
+.suppress-focus * { outline: none !important; box-shadow: none !important; }
+.suppress-focus button, .suppress-focus input, .suppress-focus textarea { -webkit-tap-highlight-color: transparent; }
+
+/* Tables */
+.dark table,
+.dark thead,
+.dark tbody,
+.dark tr,
+.dark th,
+.dark td {
+	background: transparent !important;
+	color: var(--text) !important;
+	border-color: var(--border) !important;
+}
+.dark thead th { background: rgba(255,255,255,0.03) !important; }
+
+/* Buttons and form controls */
+.dark button,
+.dark input,
+.dark textarea,
+.dark select {
+	background: var(--panel) !important;
+	color: var(--text) !important;
+	border-color: var(--border) !important;
+}
+
+/* Links and headings override if explicit dark: not provided */
+.dark a { color: var(--text) !important; }
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 { color: var(--text) !important; }
+
+/* Icons that use currentColor (lucide-react) should follow text color */
+.dark svg { color: var(--text) !important; }
+
+/* SVG helpers: allow charts to pick up a subtle stroke in dark mode for contrast */
+.chart svg, .figure svg, .plot svg { stroke: rgba(0,0,0,0); }
+.dark .chart svg, .dark .figure svg, .dark .plot svg { stroke: var(--border); }
+
+/* Figures / charts containers */
+.dark .chart, .dark .figure, .dark .plot { background: transparent !important; }
+
+/* Prevent overly bright borders on elements that used light borders */
+.dark .border, .dark .border-slate-200, .dark .border-gray-200 { border-color: var(--border) !important; }

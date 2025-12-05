@@ -1,15 +1,25 @@
 # Render.com Configuration
 # This file tells Render how to build and run the app
 
+databases:
+  - name: tracker-db
+    plan: free
+    databaseName: tracker
+    user: tracker_user
+
 services:
   - type: web
-    name: freshgrad-tracker
+    name: tracker
     env: node
     region: oregon
     plan: free
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: node server.cjs
-    healthCheckPath: /
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tracker-db
+          property: connectionString

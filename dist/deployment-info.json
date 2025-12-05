@@ -1,6 +1,0 @@
-{
-  "deployedAt": "2025-12-03T20:29:10.890Z",
-  "platform": "Linux",
-  "nodeVersion": "NODE:22-lts",
-  "buildFrom": "local"
-}

@@ -1,0 +1,8 @@
+{
+  "name": "test-app",
+  "version": "1.0.0",
+  "main": "test-server.cjs",
+  "scripts": {
+    "start": "node test-server.cjs"
+  }
+}
